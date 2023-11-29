@@ -1,0 +1,27 @@
+version: "3.4"
+
+services:
+  whisper-api-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #environment:
+      #- ASR_MODEL=base
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./app:/app/app
+      - cache-pip:/root/.cache/pip
+      - cache-poetry:/root/.cache/poetry
+      - /tmp/base:/app/large
+      # - /tmp/summarize:/app/summarize
+      # - /tmp/translate:/app/translate
+
+volumes:
+  cache-pip:
+  cache-poetry:
+  cache-whisper:
+  cache-faster-whisper:
+  large:
+  summarize:
+  translate:
