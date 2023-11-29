@@ -1,5 +1,5 @@
-![Release](https://img.shields.io/github/v/release/ahmetoner/whisper-asr-webservice.svg)
-![Docker Pulls](https://img.shields.io/docker/pulls/onerahmet/openai-whisper-asr-webservice.svg)
+![Release](v1.0)
+![Docker Pulls](v1.0)
 <!-- ![Build](https://img.shields.io/github/actions/workflow/status/ahmetoner/whisper-asr-webservice/docker-publish.yml.svg) -->
 ![Licence](https://img.shields.io/github/license/ahmetoner/whisper-asr-webservice.svg)
 # Whisper API Service
