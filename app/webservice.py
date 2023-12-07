@@ -8,6 +8,7 @@ from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.responses import StreamingResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from .openai_whisper.core import transcriber
+import time
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s | %(levelname)s | %(message)s')
@@ -49,14 +50,20 @@ async def asr(
             default="txt", enum=["txt",  "json"])
 ):
     try:
+        start_time = time.time()
         file_location = f"/tmp/{audio_file.filename}"
         with open(file_location, "wb+") as file_object:
             file_object.write(audio_file.file.read())
         file_path = os.path.dirname(file_location)
         logger.info(f"task : {task}")
         logger.info(f"lang : {lang}")
-        result = transcriber(f"{file_path}/{audio_file.filename}", task, lang, output)
-        #logger.info(result)
+        result = transcriber(
+            f"{file_path}/{audio_file.filename}", task, lang, output)
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Execution time: {elapsed_time} seconds")
+        logger.info(f"Execution time: {elapsed_time} seconds")
+        # logger.info(result)
     except Exception:
         raise Exception(status_code=500, detail='File not able to load')
     else:
